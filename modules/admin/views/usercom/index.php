@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+//use Yii;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -11,26 +12,28 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="usercom-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h2> Результаты учащегося <u><?=$name ?></u></h2>
 
-    <p>
-        <?= Html::a('Create Usercom', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    
 
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'ID',
             'WORD',
-            'ANSWER',
+            [
+		'attribute'=>'ANSWER',
+		'format' => 'raw',
+		'value'=>function($data){
+		if($data->ANSWER == 1){
+		    return '<span class="text-success">Положительно</span>';}
+		    else  return '<span class="text-danger">Отрицательно</span>';
+		}
+	    ],
             'TIME',
             'DATE',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
+	    ],
     ]); ?>
 
 

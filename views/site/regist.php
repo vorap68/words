@@ -14,6 +14,7 @@ if(!isset($regist)) $regist = new RegistForm;
 <?php $form = ActiveForm::begin(); ?>
 <?= $form->field($regist, 'username'); ?>
     <?= $form->field($regist, 'password')->passwordInput(); ?>
+      <?= $form->field($regist, 'password_repeat')->passwordInput(); ?>
     <?= $form->field($regist, 'email'); ?>
 
    

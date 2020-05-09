@@ -56,15 +56,18 @@ $json = json_encode($arr);
 	
         });
 </script>
-<div id="test">
-<div id="slovo" class="btn btn-lg  btn-primary" >
+<div id="test" style="text-align:center;" >
+  
+<div id="slovo" class="btn btn-lg  btn-primary" style="margin-bottom: 20px;margin-top:35px;" >
+</div> 
+ 
+<div>
+<button type="submit" class="btn btn-success btn-lg  btn-block" name="1" style="margin-bottom: 20px;">Я знаю это слово</button>
 </div>
 <div>
-<button type="submit" class="btn btn-success" name="1">Я знаю это слово</button>
+ <button type="submit" class="btn btn-warning btn-lg  btn-block" name="2" style="margin-bottom: 20px;">Я не знаю этого слова</button>
 </div>
-<div>
- <button type="submit" class="btn btn-warning" name="2">Я не знаю этого слова</button>
-</div>
+	
 </div>
 <div id="exit" class="btn btn-lg btn-success" style="display:none">
     Вы закончили тест

@@ -59,7 +59,7 @@ AppAsset::register($this);
 	    echo Nav::widget([
 		'options' => ['class' => 'navbar-nav navbar-right'],
 		'items' => [
-		    ['label' => 'Результаты тестов', 'url' => ['/admin/items/user_tests']],
+		    ['label' => 'Результаты тестов', 'url' => ['/admin/items/user_names']],
 		    ['label' => 'Настроить тесты', 'url' => ['/admin']],
 		    ['label' => 'Все тесты',
 			'items' => menu(),

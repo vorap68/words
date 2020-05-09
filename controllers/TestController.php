@@ -2,21 +2,24 @@
 
 namespace app\controllers;
 
+use app\modules\admin\models\Usercom;
 use yii\web\Controller;
 use app\models\Test;
 use app\models\User;
 use yii\helpers\Url;
 use Yii;
+use yii\data\ActiveDataProvider;
 
 class TestController extends Controller {
 
-    public $layout = 'test_layout';
+    public $layout = 'no_guest';
     public $id;
 
-    //запускает страницу с  тестами
+    // действие вызывается с главного меню после авторизации пользователя
+    //запускает страницу с  выбранным СТАНДАРТНЫМ тестом для конкретного пользователя
     public function actionIndex() {
         // echo 'yes';
-        $this->layout = 'test_layout';
+        $this->layout = 'no_guest';
         //$model = new Test();
         $request = Yii::$app->request;
         $id = $request->get('id');
@@ -42,7 +45,10 @@ class TestController extends Controller {
         // print_r($arr);
         return $this->render('index', compact('arr'));
     }
-    
+  
+
+// действие вызывается с главного меню после авторизации пользователя
+    //запускает страницу с  выбранным тестом от ПРЕПОДАВАТЕЛЯ для конкретного пользователя  
     public function actionTeacher(){
         $path  = "tests/".Yii::$app->request->get('name').".txt";
         $temp = file($path);
@@ -56,7 +62,7 @@ class TestController extends Controller {
         //print_r($words); exit();
     }
 
-//это рабочий вариант
+//сохранение результатов теста в БД в таблице под именем пользователя
     public function actionSave_result() {
  // этот кусок кода для записи результатов теста в файл       
 //        if ($_POST['param2']) {
@@ -69,6 +75,7 @@ class TestController extends Controller {
         if ($_POST['param2']){
             $table_name = str_replace("@","__", Yii::$app->user->identity->email);
            $table_name = str_replace(".", "_", $table_name);
+           //$count = Usercom::findOne()->
             $obj = json_decode($_POST['param2']);
              $obj->date = date("Y-m-d");
            $result =  Yii::$app->db->createCommand()->insert($table_name, [
@@ -80,6 +87,25 @@ class TestController extends Controller {
            echo $result;exit();
            //  echo $table_name;  exit();
         }
+    }
+    
+    
+    public function actionView_result() {
+        
+        $name_user = str_replace(".", "_", $_GET['email']);
+         $table_name = str_replace("@", "__", $name_user);
+       
+         $session = Yii::$app->session;
+         $session->set('tablename',$table_name);
+        $dataProvider = new ActiveDataProvider([
+            'query' => Usercom::find(),
+        ]);
+
+        return $this->render('view_result', [
+            'dataProvider' => $dataProvider,
+	    'name'=>$_GET['name'],
+        ]);
+        
     }
 
 }

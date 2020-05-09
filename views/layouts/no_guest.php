@@ -27,6 +27,14 @@ AppAsset::register($this);
         <?php $this->beginBody() ?>
 
         <div class="wrap">
+	      <script>
+                $(document).ready(function () {
+                    var nameuser = "<?= Yii::$app->user->identity->username; ?>";
+                    console.log(nameuser);
+                    if (nameuser == 'admin')
+                        location = "/admin";
+                })
+            </script>
             <?php
             //сложный код )) нужно получить все имена файлов-тестов
             // создать массив полученных имен и сформировать  и вернуть $items 
@@ -36,14 +44,28 @@ AppAsset::register($this);
 		$arr = scandir("tests/"); //массив с именами файлов
 		$arr_temp = []; //2-х мерный массив где каждый влож массив это 2 элемента
 		for ($i = 2; $i < count($arr); $i++) {
-		    $arr_temp[$i - 2] = substr($arr[$i], 0, -4); //название теста
+		    $arr_temp[$i - 2] = substr($arr[$i], 0, -4);  //название теста
 		}
 		//print_r($arr_temp); die();
 		if(empty($arr_temp)) return null;
 		for ($j = 0;$j < count($arr_temp); $j++) {
 		    $items[] = array('label' => $arr_temp[$j],
-			'url' => 'test/teacher?name=' . $arr_temp[$j],
+                            'url' => '/test/teacher?name=' . $arr_temp[$j],
 		);
+		}
+		return $items;
+	    }
+	    function count_words(){
+		$arr = array(20,50,100,300,500,1000);
+		for($i=0;$i<count($arr);$i++){
+		    $items[] = array('label'=>$arr[$i],'url'=>'#',);
+		}
+		return $items;
+	    }
+	    function limit_time(){
+		$arr = array(1,3,5,10,20,30);
+		for($i=0;$i<count($arr);$i++){
+		    $items[] = array('label'=>$arr[$i],'url'=>'#',);
 		}
 		return $items;
 	    }
@@ -80,6 +102,18 @@ AppAsset::register($this);
                         ]],
                     ['label' => 'Тесты от преподателя',
                         'items' => tests_names(),
+                    ],
+		    ['label' => 'Ограничить время теста',
+                        'items' => limit_time(),
+			
+                    ],
+		    ['label' => 'Ограничить количество слов в тесте',
+                        'items' => count_words(),
+			
+                    ],
+                      ['label' => 'Просмотреть свои тесты',
+                     'url' => ['/test/view_result', 'email' => Yii::$app->user->identity->email],
+			
                     ],
                     [
                         'label' => 'Выход (' . Yii::$app->user->identity->username . ')',

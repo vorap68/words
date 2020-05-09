@@ -44,4 +44,5 @@ class Usercom extends \yii\db\ActiveRecord
             'DATE' => 'Date',
         ];
     }
+   
 }

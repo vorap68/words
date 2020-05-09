@@ -61,11 +61,11 @@ class SiteController extends Controller {
      * @return string
      */
     public function actionIndex() {
-        if (!Yii::$app->user->isGuest) {
-            $this->layout = 'no_guest';
-        }
-        return $this->render('index');
-    }
+                if (!Yii::$app->user->isGuest) {
+                    $this->layout = 'no_guest';
+                }
+                return $this->render('index');
+            }
 
 // Запускается из шаблона main.php запускает страницу логирования
     public function actionLogin() {
@@ -104,7 +104,8 @@ class SiteController extends Controller {
     'WORD' => 'string',
     'ANSWER' => 'integer',
      'TIME'   =>'decimal',
-     'DATE'  => 'date'         
+     'DATE'  => 'date',
+      'COUNT'=>'integer'        
 ])->execute();
                
             }

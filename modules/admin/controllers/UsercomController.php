@@ -29,13 +29,10 @@ class UsercomController extends Controller
         ];
     }
 
-    /**
-     * Lists all Usercom models.
-     * @return mixed
-     */
+    
     public function actionIndex()
     {
-           $name_user = str_replace(".", "_", $_GET['name']);
+           $name_user = str_replace(".", "_", $_GET['email']);
          $table_name = str_replace("@", "__", $name_user);
        
          $session = Yii::$app->session;
@@ -46,15 +43,11 @@ class UsercomController extends Controller
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+	    'name'=>$_GET['name'],
         ]);
     }
 
-    /**
-     * Displays a single Usercom model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    //Все функции которые следуют дальше- это встроенные от виджета Gridview
     public function actionView($id)
     {
         return $this->render('view', [
@@ -62,11 +55,7 @@ class UsercomController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Usercom model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
+   
     public function actionCreate()
     {
         $model = new Usercom();
@@ -80,13 +69,7 @@ class UsercomController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Usercom model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+  
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);

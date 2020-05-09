@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Добавить слово', ['create'], ['class' => 'btn btn-success']) ?>
-        <h3>Для создания нового теста введите название теста и комментарии к тесту<h3> 
+        <h3>Для создания нового теста введите название теста и комментарии к тесту</h3> 
                <form>
   <div class="form-group">
                 <label for="test">Название</label>
@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <label for="comment">Комментарии</label>
            <textarea id="comment" class="form-control" > </textarea>
              <hr>
-<!--             <h3>выберите слова и нажмите <a href="create_test" class="btn btn-success" id="create_test">Создать</a></h3>-->
+
                 <label for="submit">выберите слова и нажмите</label>
              <button type="submit" class="btn btn-primary mb-2">Создать</button>
     <hr>
